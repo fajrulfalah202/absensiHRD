@@ -37,8 +37,6 @@
             margin-right: 2px;
         }
     </style>
-
-    
 </head>
 
 <body id="page-top">
@@ -57,24 +55,28 @@
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="karyawan">
+                <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
             <!-- Nav Item - Presensi -->
             <li class="nav-item">
-                <a class="nav-link" href="presensi_karyawan">
+                <a class="nav-link" href="">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Presensi</span></a>
             </li>
             <!-- Nav Item - Laporan Kehadiran -->
             <li class="nav-item">
-                <a class="nav-link" href="laporan_karyawan">
+                <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Laporan Kehadiran</span></a>
             </li>
             <!-- Nav Item - Laporan Kehadiran -->
-           
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>data karyawan</span></a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
@@ -129,7 +131,7 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    @yield('konten1')
+                    @yield('konten2')
 
                     {{-- Data validation --}}
                     @if ($errors->any())
@@ -257,7 +259,7 @@
         // Panggil fungsi pertama kali untuk menampilkan waktu segera
         updateClock();
     </script>
- <script src="js/demo/datatables-demo.js"></script>
+
 </body>
 
 </html>
