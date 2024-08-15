@@ -25,3 +25,4 @@ Route::get('/laporan_karyawan', function () {
     return view('karyawan.laporan.index');
 });
 
+
