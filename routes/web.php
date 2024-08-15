@@ -15,6 +15,15 @@ Route::get('/template_admin', function () {
 Route::get('/hrd', function () {
     return view('hrd.dashboard.index');
 });
+Route::get('/presensi_hrd', function () {
+    return view('hrd.presensi.index');
+});
+Route::get('/laporan_hrd', function () {
+    return view('hrd.laporan.index');
+});
+Route::get('/datakaryawan', function () {
+    return view('hrd.data_karyawan.index');
+});
 Route::get('/karyawan', function () {
     return view('karyawan.dashboard.index');
 });

@@ -55,27 +55,27 @@
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="hrd">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
             <!-- Nav Item - Presensi -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="presensi_hrd">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Presensi</span></a>
             </li>
             <!-- Nav Item - Laporan Kehadiran -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="laporan_hrd">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Laporan Kehadiran</span></a>
             </li>
             <!-- Nav Item - Laporan Kehadiran -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="datakaryawan">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>data karyawan</span></a>
+                    <span>Data Karyawan</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
