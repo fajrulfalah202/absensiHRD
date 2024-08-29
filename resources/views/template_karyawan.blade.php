@@ -78,6 +78,16 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Laporan Kehadiran</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="laporan_karyawan">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Laporan keterlambatan</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="laporan_karyawan">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Laporan lembur</span></a>
+            </li>
             <!-- Nav Item - Laporan Kehadiran -->
            
             <!-- Divider -->

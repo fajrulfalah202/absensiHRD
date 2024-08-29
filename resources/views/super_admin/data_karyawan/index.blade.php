@@ -106,7 +106,7 @@
 {{-- @include('penduduk.modaledit')
 @include('penduduk.modaldelete') --}}
 
-@include('hrd.data_karyawan.modal')
+@include('super_admin.data_karyawan.modal')
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -114,7 +114,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="dataKaryawan" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Aksi</th>
@@ -144,15 +144,8 @@
                                     <tbody>
                                         {{-- @foreach ($penerima as $atribut) --}}
                                         <tr>
-                                            <td>sa</td>
-                                            <td>sa</td>
-                                            <td>sa</td>
-                                            <td>sa</td>
-                                            <td>sa</td>
-                                            <td>sa</td>
-                                            <td>sa</td>
-                                            <td>sa</td>
-                                            <td>sa</td>
+                                            <td></td>
+                                            
                                         </tr>
                                         {{-- @endforeach --}}
                                     </tbody>
@@ -180,6 +173,90 @@
                         </div>
                     </div>
 
+                    <script>
+                        $(document).ready(function() {
+                            var table = $('#dataKaryawan').DataTable({
+                                processing: true,
+                                serverSide: true,
+                                ajax: {
+                                    url: "{{ route('Data_karyawan.getDummy') }}",
+                                    error: function(xhr, error, thrown) {
+                                        alert('Something went wrong. Please try again.');
+                                    }
+                                },
+                                columns: [
+                                    {
+                                        data: null,
+                                       render: function(data, type, row) {
+                                        return ('<a href="#" class="btn btn-sm btn-warning">Edit</a> <a href="#" class="btn btn-sm btn-danger">hapus</a>');
+                                    },
+                                    orderable: false,
+                                    searchable: false,
+                                    },
+                                    {
+                                        data: 'nama',
+                                        name: 'nama',
+                                        orderable: true,
+                                        searchable: true,
+                                    },
+                                    {
+                                        data: 'nik',
+                                        name: 'nik',
+                                        orderable: true,
+                                        searchable: true,
+                                    },
+                                    {
+                                        data: 'jenis_kelamin',
+                                        name: 'jenis_kelamin',
+                                        orderable: true,
+                                        searchable: true,
+                                    },
+                                    {
+                                        data: 'tempat_lahir',
+                                        name: 'tempat_lahir',
+                                        orderable: true,
+                                        searchable: true,
+                                    },
+                                    {
+                                        data: 'tanggal_lahir',
+                                        name: 'tanggal_lahir',
+                                        orderable: true,
+                                        searchable: true,
+                                    },
+                                    {
+                                        data: 'alamat',
+                                        name: 'alamat',
+                                        orderable: true,
+                                        searchable: true,
+                                    },
+                                    {
+                                        data: 'perusahaan',
+                                        name: 'perusahaan',
+                                        orderable: true,
+                                        searchable: true,
+                                    },
+                                    {
+                                        data: 'posisi',
+                                        name: 'posisi',
+                                        orderable: true,
+                                        searchable: true,
+                                    }
+                                ],
+                                order: [
+                                    [1, 'asc']
+                                ],
+                                searching: true,
+                                paging: true,
+                                lengthMenu: [10, 25, 50, 100],
+                                pageLength: 10,
+                                responsive: true,
+                                autoWidth: true,
+                                initComplete: function(settings, json) {
+                                    // Fungsi ini bisa disesuaikan atau dihapus jika tidak digunakan
+                                }
+                            });
+                        });
+                    </script>
 @endsection
 
 

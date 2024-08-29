@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  @include('hrd.presensi.modal')
+  @include('super_admin.presensi.modal')
 
 <br>
   <div class="row   justify-content-center">

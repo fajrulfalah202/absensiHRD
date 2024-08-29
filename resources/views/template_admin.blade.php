@@ -17,8 +17,15 @@
     <link href="fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap JS (jika digunakan) -->
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+        <!-- Custom styles for this template -->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -55,25 +62,36 @@
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="hrd">
+                <a class="nav-link" href="SuperAdmin-dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
             <!-- Nav Item - Presensi -->
             <li class="nav-item">
-                <a class="nav-link" href="presensi_hrd">
+                <a class="nav-link" href="SuperAdmin-Presensi">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Presensi</span></a>
             </li>
             <!-- Nav Item - Laporan Kehadiran -->
             <li class="nav-item">
-                <a class="nav-link" href="laporan_hrd">
+                <a class="nav-link" href="SuperAdmin-LaporanKehadiran">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Laporan Kehadiran</span></a>
             </li>
-            <!-- Nav Item - Laporan Kehadiran -->
+            {{-- keterlambatan --}}
             <li class="nav-item">
-                <a class="nav-link" href="datakaryawan">
+                <a class="nav-link" href="SuperAdmin-LaporanKehadiran-terlambat">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Laporan keterlambatan</span></a>
+            </li>
+            {{-- lembur --}}
+            <li class="nav-item">
+                <a class="nav-link" href="SuperAdmin-LaporanKehadiran-lembur">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Laporan lembur</span></a>
+            <!-- Nav Item - data karyawan -->
+            <li class="nav-item">
+                <a class="nav-link" href="SuperAdmin-DataKaryawan">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Data Karyawan</span></a>
             </li>

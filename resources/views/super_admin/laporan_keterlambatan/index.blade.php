@@ -14,15 +14,12 @@
                         <th>Check Out</th>
                         <th>Lokasi</th>
                         <th>Keterangan</th>
+                        <th>aksi</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>Tanggal</th>
-                        <th>Check In</th>
-                        <th>Check Out</th>
-                        <th>Lokasi</th>
-                        <th>Keterangan</th>
+                      
                     </tr>
                 </tfoot>
                 <tbody>

@@ -20,7 +20,7 @@
     <style>
         body {
             font-family: 'Nunito', sans-serif;
-            background-color: #f8f9fc;
+            background-color: grey;
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -39,16 +39,7 @@
             position: relative;
         }
 
-        .main-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
+  
 
         .welcome-text {
             z-index: 2;
@@ -90,6 +81,84 @@
             padding: 1rem 0;
             text-align: center;
         }
+
+
+        .card{
+
+        width: 400px;
+        border:none;
+
+        }
+
+
+
+
+        .btr{
+
+        border-top-right-radius: 5px !important;
+        }
+
+
+        .btl{
+
+        border-top-left-radius: 5px !important;
+        }
+
+        .btn-dark {
+        color: #fff;
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        }
+
+
+        .btn-dark:hover {
+        color: #fff;
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        }
+
+
+        .nav-pills{
+
+        display:table !important;
+        width:100%;
+        }
+
+        .nav-pills .nav-link {
+        border-radius: 0px;
+            border-bottom: 1px solid #0d6efd40;
+
+        }
+
+        .nav-item{
+            display: table-cell;
+            background: #0d6efd2e;
+        }
+
+
+        .form{
+
+        padding: 10px;
+            height: 300px;
+        }
+
+        .form input{
+
+        margin-bottom: 12px;
+        border-radius: 3px;
+        }
+
+
+        .form input:focus{
+
+        box-shadow: none;
+        }
+
+
+        .form button{
+
+        margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -100,9 +169,9 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 {{-- <img src="{{ asset('img/Lambang_Kabupaten_Gresik.png') }}" alt="Logo" width="30" height="30" class="d-inline-block align-top"> --}}
-                {{-- Desa Dalegan --}}
+                human resource
             </a>
-            <div class="d-flex">
+            {{-- <div class="d-flex">
                 @if (Route::has('login'))
                 <div>
                     @auth
@@ -114,15 +183,49 @@
                     @endauth
                 </div>
                 @endif
-            </div>
+            </div> --}}
         </div>
     </nav>
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="welcome-text">
-            <h1>SELAMAT DATANG </h1>
-            <p>silakan login untuk presensi</p>
+        <div class="d-flex justify-content-center align-items-center mt-5">
+
+
+            <div class="card">
+    
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item text-center">
+                      <a class="nav-link active btl" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Login</a>
+                    </li>
+                   
+                  </ul>
+                  <div class="tab-content" id="pills-tabContent">
+                    <form action="/login" method="POST">
+                        @csrf
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                      
+                            <div class="form px-4 pt-5">
+          
+                              <input type="text" name="email" class="form-control" placeholder="Email or Phone">
+          
+                              <input type="text" name="password" class="form-control" placeholder="Password">
+                              <button class="btn btn-dark btn-block">Login</button>
+          
+                            </div>    
+                          </div>
+                    </form>
+                   
+                    
+                   </div>
+                
+              
+              
+    
+            </div>
+            
+    
+          </div>
         </div>
     </div>
 
