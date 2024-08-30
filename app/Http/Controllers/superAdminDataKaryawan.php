@@ -15,10 +15,21 @@ class superAdminDataKaryawan extends Controller
     }
     public function getDummyDataKaryawan()
     {
-        $dummyData = [
+        return [
             [
-             
+                'id' => 1,
                 'nama' => 'toto',
+                'nik' => '111',
+                'jenis_kelamin' => 'laki laki',
+                'tempat_lahir' => 'inggris',
+                'tanggal_lahir' => '2024-08-01',
+                'alamat' => 'inggris',
+                'perusahaan' => 'perusahaan 3',
+                'posisi' => 'team principal',
+            ],
+            [
+                'id' => 2,
+                'nama' => 'titi',
                 'nik' => '111',
                 'jenis_kelamin' => 'laki laki',
                 'tempat_lahir' => 'inggris',
@@ -28,7 +39,11 @@ class superAdminDataKaryawan extends Controller
                 'posisi' => 'team principal',
             ],
         ];
-        
+    }
+
+    public function getDummyDataKaryawanJson()
+    {
+        $dummyData = $this->getDummyDataKaryawan();
         return response()->json(['data' => $dummyData]);
     }
     /**
@@ -60,7 +75,25 @@ class superAdminDataKaryawan extends Controller
      */
     public function edit(string $id)
     {
-        //
+            // Fetch the dummy data
+        $dummyData = $this->getDummyDataKaryawan();
+
+        // dd($dummyData, $id);
+
+        // Find the specific data by ID
+        $data = collect($dummyData)->firstWhere('id', (int)$id);
+        if (is_array($data)) {
+            $data = (object) $data;
+        }
+        // dd($data);
+
+        if ($data) {
+            //  dd($data);
+            return view('super_admin.data_karyawan.edit', compact('data'));
+        } else {
+            return redirect()->back()->with('error', 'Data not found');
+        }
+
     }
 
     /**

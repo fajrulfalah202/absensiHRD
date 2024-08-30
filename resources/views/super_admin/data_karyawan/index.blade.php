@@ -100,7 +100,7 @@
 
 
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+                    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script> --}}
 
 
 {{-- @include('penduduk.modaledit')
@@ -188,7 +188,7 @@
                                     {
                                         data: null,
                                        render: function(data, type, row) {
-                                        return ('<a href="#" class="btn btn-sm btn-warning">Edit</a> <a href="#" class="btn btn-sm btn-danger">hapus</a>');
+                                        return ('<a href="/SuperAdmin-DataKaryawan/'+ row.id +'/edit" class="btn btn-sm btn-warning">Edit</a> <a href="#" class="btn btn-sm btn-danger">hapus</a>');
                                     },
                                     orderable: false,
                                     searchable: false,

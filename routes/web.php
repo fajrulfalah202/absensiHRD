@@ -10,24 +10,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::middleware('auth')->group(function () {
-    Route::get('/SuperAdmin-dashboard', [superAdminDashboard::class, 'index'])->name('dashboard.index');
-    Route::get('/SuperAdmin-LaporanKehadiran', [superAdminLaporanKehadiran::class, 'index'])->name('lapor.index');
+// Route::middleware('superadmin')->group(function () {
+    Route::get('/SuperAdmin-dashboard', [superAdminDashboard::class, 'index'])->name('SA-dashboard');
+     Route::get('/SuperAdmin-LaporanKehadiran', [superAdminLaporanKehadiran::class, 'index'])->name('lapor.index');
     Route::get('/SuperAdmin-LaporanKehadiran-terlambat', [superAdminLaporanKehadiran::class, 'terlambat'])->name('lapor.terlambat');
     Route::get('/SuperAdmin-LaporanKehadiran-lembur', [superAdminLaporanKehadiran::class, 'lembur'])->name('lapor.lembur');
     Route::get('/SuperAdmin-Presensi', [superAdminPresensi::class, 'index'])->name('presensi.index');
     Route::get('/SuperAdmin-DataKaryawan', [superAdminDataKaryawan::class, 'index'])->name('Data_karyawan.index');
+    Route::get('/SuperAdmin-DataKaryawan/{id}/edit', [superAdminDataKaryawan::class, 'edit'])->name('Data_karyawan.edit');
 
 
     Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran', [superAdminLaporanKehadiran::class, 'getDummyKehadiran'])->name('Data_kehadiran.getDummy');
     Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran-terlambat', [superAdminLaporanKehadiran::class, 'getDummyTerlambat'])->name('Data_kehadiran.getTerlambat');
     Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran-lembur', [superAdminLaporanKehadiran::class, 'getDummyLembur'])->name('Data_kehadiran.getLembur');
-    Route::get('/SuperAdmin-DataKaryawan-dataKaryawan', [superAdminDataKaryawan::class, 'getDummyDataKaryawan'])->name('Data_karyawan.getDummy');
+    Route::get('/SuperAdmin-DataKaryawan-dataKaryawan', [superAdminDataKaryawan::class, 'getDummyDataKaryawanJson'])->name('Data_karyawan.getDummy');
 
 // });
-
-Route::get('/login', [loginController::class, 'index']);
-Route::post('/login', [loginController::class, 'authenticate']);
+Route::get('/login', [loginController::class, 'form'])->name('login.form');
+Route::post('/login', [loginController::class, 'login'])->name('login');
 
 
 Route::get('/template_karyawan', function () {

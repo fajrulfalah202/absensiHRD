@@ -171,7 +171,7 @@
                 {{-- <img src="{{ asset('img/Lambang_Kabupaten_Gresik.png') }}" alt="Logo" width="30" height="30" class="d-inline-block align-top"> --}}
                 human resource
             </a>
-            {{-- <div class="d-flex">
+            <div class="d-flex">
                 @if (Route::has('login'))
                 <div>
                     @auth
@@ -183,7 +183,7 @@
                     @endauth
                 </div>
                 @endif
-            </div> --}}
+            </div>
         </div>
     </nav>
 
@@ -201,15 +201,19 @@
                    
                   </ul>
                   <div class="tab-content" id="pills-tabContent">
-                    <form action="/login" method="POST">
+                    <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                       
                             <div class="form px-4 pt-5">
+                                @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                                @endif
+                              <input type="text" name="username" class="form-control" placeholder="username">
           
-                              <input type="text" name="email" class="form-control" placeholder="Email or Phone">
-          
-                              <input type="text" name="password" class="form-control" placeholder="Password">
+                              <input type="password" name="password" class="form-control" placeholder="Password">
                               <button class="btn btn-dark btn-block">Login</button>
           
                             </div>    
