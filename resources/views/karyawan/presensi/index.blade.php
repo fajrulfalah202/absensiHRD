@@ -2,15 +2,15 @@
 @section('konten1')
 <div class="card">
     <div class="card-header  bg-secondary text-light">
-     <h1>laporan</h1> 
+     <h1>Laporan</h1> 
     </div>
     <div class="card-body">
       <h5 class="card-title"> <div id="jam" class=" d-lg-inline "></div></h5>
      
-      <h6>status: -</h6>
-      <h6>masuk jam: -</h6>
-      <h6>keluar jam: -</h6>
-      <h6>lokasi: -</h6>
+      <h6>Status: -</h6>
+      <h6>Masuk Jam: -</h6>
+      <h6>Keluar Jam: -</h6>
+      <h6>Lokasi: -</h6>
     </div>
   </div>
 
@@ -19,15 +19,15 @@
 <br>
   <div class="row   justify-content-center">
     <div class="col  text-center ">
-        <a href="#" data-bs-toggle="modal" data-bs-target="#karyawan_masuk" class="btn btn-primary btn-lg">presensi masuk</a>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#karyawan_masuk" class="btn btn-primary btn-lg">Presensi Masuk</a>
     </div>
     <div class="col  text-center">
-        <a href="#" class="btn btn-primary btn-lg">presensi keluar</a>
+        <a href="#" class="btn btn-primary btn-lg">Presensi Keluar</a>
     </div>
   </div>
   <div class="row justify-content-center ">
     <div class="col-2   ">
-        <a href="#" data-bs-toggle="modal"data-bs-target="#karyawan_tidak_masuk" class="btn btn-primary  btn-lg ">izin absen</a>
+        <a href="#" data-bs-toggle="modal"data-bs-target="#karyawan_tidak_masuk" class="btn btn-primary  btn-lg ">Izin Absen</a>
     </div>
   </div>
   <script>

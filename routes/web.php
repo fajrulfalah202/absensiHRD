@@ -10,6 +10,12 @@ use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\AdminLaporanKehadiran;
 use App\Http\Controllers\AdminPresensi;
 use App\Http\Controllers\AdminDataKaryawan;
+
+use App\Http\Controllers\KaryawanDashboard;
+use App\Http\Controllers\KaryawanLaporanKehadiran;
+use App\Http\Controllers\KaryawanPresensi;
+use App\Http\Controllers\KaryawanDataKaryawan;
+
 use App\Http\Controllers\loginController;
 Route::get('/', function () {
     return view('welcome');
@@ -24,11 +30,11 @@ Route::get('/', function () {
     Route::get('/SuperAdmin-DataKaryawan', [superAdminDataKaryawan::class, 'index'])->name('Data_karyawan.index');
     Route::get('/SuperAdmin-DataKaryawan/{id}/edit', [superAdminDataKaryawan::class, 'edit'])->name('Data_karyawan.edit');
 
-
     Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran', [superAdminLaporanKehadiran::class, 'getDummyKehadiran'])->name('Data_kehadiran.getDummy');
     Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran-terlambat', [superAdminLaporanKehadiran::class, 'getDummyTerlambat'])->name('Data_kehadiran.getTerlambat');
     Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran-lembur', [superAdminLaporanKehadiran::class, 'getDummyLembur'])->name('Data_kehadiran.getLembur');
     Route::get('/SuperAdmin-DataKaryawan-dataKaryawan', [superAdminDataKaryawan::class, 'getDummyDataKaryawanJson'])->name('Data_karyawan.getDummy');
+
 
     Route::get('/Admin-dashboard', [AdminDashboard::class, 'index'])->name('Admin-dashboard');
     Route::get('/Admin-LaporanKehadiran', [AdminLaporanKehadiran::class, 'index'])->name('lapor.index');
@@ -42,6 +48,20 @@ Route::get('/', function () {
     Route::get('/Admin-LaporanKehadiran-dataKehadiran-terlambat', [AdminLaporanKehadiran::class, 'getDummyTerlambat'])->name('Data_kehadiran.getTerlambat');
     Route::get('/Admin-LaporanKehadiran-dataKehadiran-lembur', [AdminLaporanKehadiran::class, 'getDummyLembur'])->name('Data_kehadiran.getLembur');
     Route::get('/Admin-DataKaryawan-dataKaryawan', [AdminDataKaryawan::class, 'getDummyDataKaryawanJson'])->name('Data_karyawan.getDummy');
+
+    
+    Route::get('/Karyawan-dashboard', [KaryawanDashboard::class, 'index'])->name('Karyawan-dashboard');
+    Route::get('/Karyawan-LaporanKehadiran', [KaryawanLaporanKehadiran::class, 'index'])->name('lapor.index');
+    Route::get('/Karyawan-LaporanKehadiran-terlambat', [KaryawanLaporanKehadiran::class, 'terlambat'])->name('lapor.terlambat');
+    Route::get('/Karyawan-LaporanKehadiran-lembur', [KaryawanLaporanKehadiran::class, 'lembur'])->name('lapor.lembur');
+    Route::get('/Karyawan-Presensi', [KaryawanPresensi::class, 'index'])->name('presensi.index');
+    Route::get('/Karyawan-DataKaryawan', [KaryawanDataKaryawan::class, 'index'])->name('Data_karyawan.index');
+    Route::get('/Karyawan-DataKaryawan/{id}/edit', [KaryawanDataKaryawan::class, 'edit'])->name('Data_karyawan.edit');
+
+    Route::get('/Karyawan-LaporanKehadiran-dataKehadiran', [KaryawanLaporanKehadiran::class, 'getDummyKehadiran'])->name('Data_kehadiran.getDummy');
+    Route::get('/Karyawan-LaporanKehadiran-dataKehadiran-terlambat', [KaryawanLaporanKehadiran::class, 'getDummyTerlambat'])->name('Data_kehadiran.getTerlambat');
+    Route::get('/Karyawan-LaporanKehadiran-dataKehadiran-lembur', [KaryawanLaporanKehadiran::class, 'getDummyLembur'])->name('Data_kehadiran.getLembur');
+    Route::get('/Karyawan-DataKaryawan-dataKaryawan', [KaryawanDataKaryawan::class, 'getDummyDataKaryawanJson'])->name('Data_karyawan.getDummy');
 
 // });
 Route::get('/login', [loginController::class, 'form'])->name('login.form');
@@ -69,15 +89,15 @@ Route::get('/template_admin', function () {
 // Route::get('/datakaryawan', function () {
 //     return view('super_admin.data_karyawan.index');
 // });
-Route::get('/karyawan', function () {
-    return view('karyawan.dashboard.index');
-});
-Route::get('/presensi_karyawan', function () {
-    return view('karyawan.presensi.index');
-});
-Route::get('/laporan_karyawan', function () {
-    return view('karyawan.laporan.index');
-});
+// Route::get('/karyawan', function () {
+//     return view('karyawan.dashboard.index');
+// });
+// Route::get('/presensi_karyawan', function () {
+//     return view('karyawan.presensi.index');
+// });
+// Route::get('/laporan_karyawan', function () {
+//     return view('karyawan.laporan.index');
+// });
 
 // require __DIR__ . '/auth.php';
 

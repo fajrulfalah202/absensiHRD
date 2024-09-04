@@ -1,6 +1,6 @@
 @extends('template_karyawan')
 @section('konten1')
-<h1>laporan kehadiran</h1>
+<h1>Laporan Kehadiran</h1>
 
 <div class="row">
     <div class="col">

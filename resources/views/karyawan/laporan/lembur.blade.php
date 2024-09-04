@@ -2,11 +2,11 @@
 @section('konten1')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h5 class="m-0 font-weight-bold text-primary">Data Laporan Kehadiran Bulan Ini </h5>
+        <h5 class="m-0 font-weight-bold text-primary">Data Laporan lembur Bulan Ini </h5>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered display" id="dataKehadiran" width="100%" cellspacing="0">
+            <table class="table table-bordered display" id="dataTerlambat" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Nama</th>
@@ -37,11 +37,12 @@
 
 <script>
     $(document).ready(function() {
-        var table = $('#dataKehadiran').DataTable({
+        var table = $('#dataTerlambat').DataTable({
             processing: true,
-            serverSide: true,
+            serverSide: false,
             ajax: {
-                url: "{{ route('Data_kehadiran.getDummy') }}",
+
+                url: "{{ route('Data_kehadiran.getLembur') }}",
                 error: function(xhr, error, thrown) {
                     alert('Something went wrong. Please try again.');
                 }

@@ -80,15 +80,15 @@
             </li>
             {{-- keterlambatan --}}
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/SuperAdmin-LaporanKehadiran-lembur') }}">
+                <a class="nav-link" href="{{ url('/SuperAdmin-LaporanKehadiran-terlambat') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Laporan keterlambatan</span></a>
+                    <span>Laporan Keterlambatan</span></a>
             </li>
             {{-- lembur --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/SuperAdmin-LaporanKehadiran-lembur') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Laporan lembur</span></a>
+                    <span>Laporan Lembur</span></a>
             <!-- Nav Item - data karyawan -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('SuperAdmin-DataKaryawan')}}">

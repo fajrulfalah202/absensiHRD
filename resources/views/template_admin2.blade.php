@@ -80,7 +80,7 @@
             </li>
             {{-- Keterlambatan --}}
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/Admin-LaporanKehadiran-lembur') }}">
+                <a class="nav-link" href="{{ url('/Admin-LaporanKehadiran-terlambat') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Laporan Keterlambatan</span></a>
             </li>
