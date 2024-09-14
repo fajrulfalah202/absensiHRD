@@ -42,15 +42,15 @@
             serverSide: false,
             ajax: {
 
-                url: "{{ route('Data_kehadiran.getLembur') }}",
+                url: "{{ route('Super.Data_kehadiran.getLembur') }}",
                 error: function(xhr, error, thrown) {
                     alert('Something went wrong. Please try again.');
                 }
             },
             columns: [
                 {
-                    data: 'nama',
-                    name: 'nama',
+                    data: 'id_user',
+                    name: 'id_user',
                     orderable: true,
                     searchable: true,
                 },

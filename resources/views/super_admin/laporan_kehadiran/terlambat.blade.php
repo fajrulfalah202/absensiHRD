@@ -42,7 +42,7 @@
             serverSide: false,
             ajax: {
 
-                url: "{{ route('Data_kehadiran.getTerlambat') }}",
+                url: "{{ route('Super.Data_kehadiran.getTerlambat') }}",
                 error: function(xhr, error, thrown) {
                     alert('Something went wrong. Please try again.');
                 }
@@ -50,8 +50,8 @@
             columns: [
                
                 {
-                    data: 'nama',
-                    name: 'nama',
+                    data: 'id_user',
+                    name: 'id_user',
                     orderable: true,
                     searchable: true,
                 },

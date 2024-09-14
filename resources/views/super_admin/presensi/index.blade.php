@@ -7,10 +7,10 @@
     <div class="card-body">
       <h5 class="card-title"> <div id="jam" class=" d-lg-inline "></div></h5>
      
-      <h6>Status: -</h6>
-      <h6>Masuk Jam: -</h6>
-      <h6>Keluar Jam: -</h6>
-      <h6>Lokasi: -</h6>
+      <h6>Status: {{ $dataPresensi->status  ?? '-' }}</h6>
+      <h6>Masuk Jam: {{ $dataPresensi->check_in  ?? '-' }}</h6>
+      <h6>Keluar Jam: {{ $dataPresensi->check_out  ?? '-' }}</h6>
+      <h6>Lokasi: {{ $dataPresensi->lokasi  ?? '-' }}</h6>
     </div>
   </div>
 
@@ -18,17 +18,35 @@
 
 <br>
   <div class="row   justify-content-center">
-    <div class="col  text-center ">
+    <div class="col text-center">
+      @if ((!$sudahMasuk && !$canPresensi)&&!$sudahkeluar)
+       
         <a href="#" data-bs-toggle="modal" data-bs-target="#karyawan_masuk" class="btn btn-primary btn-lg">Presensi Masuk</a>
-    </div>
-    <div class="col  text-center">
-        <a href="#" class="btn btn-primary btn-lg">Presensi Keluar</a>
-    </div>
+       
+      @else
+          <a href="#" class="btn btn-secondary btn-lg disabled">Presensi Masuk</a>
+      @endif
   </div>
-  <div class="row justify-content-center ">
-    <div class="col-2   ">
-        <a href="#" data-bs-toggle="modal"data-bs-target="#karyawan_tidak_masuk" class="btn btn-primary  btn-lg ">Izin Absen</a>
+  <div class="col text-center">
+      @if ((!$canPresensi && !$sudahkeluar) &&$sudahMasuk)
+      <a href="#" class="btn btn-primary btn-lg" data-bs-target="#karyawan_keluar" data-bs-toggle="modal">Presensi Keluar</a>
+
+      @else
+      <a href="#" class="btn btn-secondary btn-lg disabled">Presensi Keluar</a>
+    
+      @endif
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-2">
+      @if (!$sudahMasuk&& !$canPresensi)
+      <a href="#" data-bs-toggle="modal" data-bs-target="#karyawan_tidak_masuk" class="btn btn-primary btn-lg">Izin Absen</a>
+
+      @else
+      <a href="#" data-bs-toggle="modal" data-bs-target="#karyawan_tidak_masuk" class="btn btn-secondary btn-lg disabled">Izin Absen</a>
+
+      @endif
     </div>
+</div>
   </div>
   <script>
     function updateClock() {

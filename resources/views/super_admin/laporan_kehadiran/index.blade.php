@@ -10,10 +10,11 @@
                 <thead>
                     <tr>
                         <th>Aksi</th>
-                        <th>nama</th>
+                        <th>id user</th>
                         <th>Tanggal</th>
                         <th>Check In</th>
                         <th>Check Out</th>
+                        <th>status</th>
                         <th>Lokasi</th>
                         <th>Keterangan</th>
                     </tr>
@@ -21,10 +22,11 @@
                 <tfoot>
                     <tr>
                         <th>Aksi</th>
-                        <th>nama</th>
+                        <th>id user</th>
                         <th>Tanggal</th>
                         <th>Check In</th>
                         <th>Check Out</th>
+                        <th>status</th>
                         <th>Lokasi</th>
                         <th>Keterangan</th>
                     </tr>
@@ -36,14 +38,47 @@
         </div>
     </div>
 </div>
-
+{{-- modal hapius --}}
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus data ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <form id="deleteForm" method="POST" action="" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
+        var deleteForm = $('#deleteForm');
+
+        // Handle click event for delete button
+        $('#dataKehadiran').on('click', '.btn-delete', function() {
+            var id = $(this).data('id');
+            var actionUrl = '/SuperAdmin-LaporanKehadiran-dataKehadiran/' + id +'/destroy';
+            
+            // Set the form action URL
+            deleteForm.attr('action', actionUrl);
+        });
+       
+        
         var table = $('#dataKehadiran').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('Data_kehadiran.getDummy') }}",
+                url: "{{ route('Super.Data_kehadiran.getData') }}",
                 error: function(xhr, error, thrown) {
                     alert('Something went wrong. Please try again.');
                 }
@@ -52,14 +87,18 @@
                 {
                     data: null,
                    render: function(data, type, row) {
-                    return ('<a href="#" class="btn btn-sm btn-warning">Edit</a> <a href="#" class="btn btn-sm btn-danger">hapus</a>');
-                },
+                    return (
+                            '<a href="/SuperAdmin-LaporanKehadiran/' + row.id + '/edit" class="btn btn-sm btn-warning">Edit</a> ' +
+                            '<button class="btn btn-sm btn-danger btn-delete" data-id="' + row.id + '" data-bs-toggle="modal" data-bs-target="#deleteModal">Hapus</button>'
+                        );
+                    },
+                // /SuperAdmin-LaporanKehadiran-dataKehadiran/{id}/edit
                 orderable: false,
                 searchable: false,
                 },
                 {
-                    data: 'nama',
-                    name: 'nama',
+                    data: 'id_user',
+                    name: 'id_user',
                     orderable: true,
                     searchable: true,
                 },
@@ -78,6 +117,12 @@
                 {
                     data: 'check_out',
                     name: 'check_out',
+                    orderable: true,
+                    searchable: true,
+                },
+                {
+                    data: 'status',
+                    name: 'status',
                     orderable: true,
                     searchable: true,
                 },
@@ -107,6 +152,7 @@
                 // Fungsi ini bisa disesuaikan atau dihapus jika tidak digunakan
             }
         });
+        // console.log('Table initialized:', table);
     });
 </script>
 @endsection

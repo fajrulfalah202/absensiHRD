@@ -31,7 +31,7 @@
     <link href="{{ url('datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
     <!-- Bootstrap core JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>{{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script> --}}
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -56,7 +56,7 @@
                 <div class="sidebar-brand-icon ">
                     <img class="img-profile rounded-circle" src="{{ url('img/undraw_profile.svg')}}" alt="sa">
                 </div>
-                <div class="sidebar-brand-text mx-3">Testing</div>
+                <div class="sidebar-brand-text mx-3">testing</div>
             </a>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -95,6 +95,11 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Data Karyawan</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('SA.Data_User.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Data user</span></a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
@@ -120,7 +125,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Testing</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $dataKaryawan->nama ?? 'unkown' }}</span>
                                 <img class="img-profile rounded-circle" src="{{ url('img/undraw_profile.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -207,7 +212,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -224,38 +229,7 @@
     <script src="{{ url('datatables/dataTables.bootstrap4.min.js')}}"></script>
     <!-- Page level custom scripts -->
     <script src="{{ url('js/demo/datatables-demo.js')}}"></script>
-    {{-- <script>
-        function updateClock() {
-            var now = new Date();
-            var hours = now.getHours();
-            var minutes = now.getMinutes();
-            var seconds = now.getSeconds();
-            // Tambahkan 0 di depan angka jika kurang dari 10
-            if (hours < 10) hours = "0" + hours;
-            if (minutes < 10) minutes = "0" + minutes;
-            if (seconds < 10) seconds = "0" + seconds;
-            var timeString = hours + ":" + minutes + ":" + seconds;
-            document.getElementById('clock').innerText = timeString;
-        }
-        // Perbarui jam setiap detik
-        setInterval(updateClock, 1000);
-        // Jalankan fungsi updateClock sekali untuk langsung menampilkan jam saat halaman dimuat
-        updateClock();
-
-        // tanggal
-        function updateDateAndDay() {
-            let now = new Date();
-            let dateString = now.toLocaleDateString();
-            let dayString = now.toLocaleDateString('id-ID', { weekday: 'long' });
-
-            document.getElementById('current-date').innerText = dateString;
-            document.getElementById('current-day').innerText = dayString;
-        }
-        updateDateAndDay();
-    
-
-
-    </script> --}}
+   
     <script>
         function updateClock() {
             const now = new Date();

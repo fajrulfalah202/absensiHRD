@@ -5,6 +5,7 @@ use App\Http\Controllers\superAdminDashboard;
 use App\Http\Controllers\superAdminLaporanKehadiran;
 use App\Http\Controllers\superAdminPresensi;
 use App\Http\Controllers\superAdminDataKaryawan;
+use App\Http\Controllers\superAdminUserController;
 
 use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\AdminLaporanKehadiran;
@@ -18,65 +19,117 @@ use App\Http\Controllers\KaryawanDataKaryawan;
 
 use App\Http\Controllers\loginController;
 Route::get('/', function () {
+    try {
+        DB::connection()->getPdo();
+        echo "Connected successfully to: " . DB::connection()->getDatabaseName();
+    } catch (\Exception $e) {
+        die("Could not connect to the database. Please check your configuration. error:" . $e );
+    }
+
     return view('welcome');
 });
 
-// Route::middleware('superadmin')->group(function () {
+// super admin
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/SuperAdmin-dashboard', [superAdminDashboard::class, 'index'])->name('SA-dashboard');
-    Route::get('/SuperAdmin-LaporanKehadiran', [superAdminLaporanKehadiran::class, 'index'])->name('lapor.index');
-    Route::get('/SuperAdmin-LaporanKehadiran-terlambat', [superAdminLaporanKehadiran::class, 'terlambat'])->name('lapor.terlambat');
-    Route::get('/SuperAdmin-LaporanKehadiran-lembur', [superAdminLaporanKehadiran::class, 'lembur'])->name('lapor.lembur');
-    Route::get('/SuperAdmin-Presensi', [superAdminPresensi::class, 'index'])->name('presensi.index');
-    Route::get('/SuperAdmin-DataKaryawan', [superAdminDataKaryawan::class, 'index'])->name('Data_karyawan.index');
-    Route::get('/SuperAdmin-DataKaryawan/{id}/edit', [superAdminDataKaryawan::class, 'edit'])->name('Data_karyawan.edit');
-
-    Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran', [superAdminLaporanKehadiran::class, 'getDummyKehadiran'])->name('Data_kehadiran.getDummy');
-    Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran-terlambat', [superAdminLaporanKehadiran::class, 'getDummyTerlambat'])->name('Data_kehadiran.getTerlambat');
-    Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran-lembur', [superAdminLaporanKehadiran::class, 'getDummyLembur'])->name('Data_kehadiran.getLembur');
-    Route::get('/SuperAdmin-DataKaryawan-dataKaryawan', [superAdminDataKaryawan::class, 'getDummyDataKaryawanJson'])->name('Data_karyawan.getDummy');
-
-
-    Route::get('/Admin-dashboard', [AdminDashboard::class, 'index'])->name('Admin-dashboard');
-    Route::get('/Admin-LaporanKehadiran', [AdminLaporanKehadiran::class, 'index'])->name('lapor.index');
-    Route::get('/Admin-LaporanKehadiran-terlambat', [AdminLaporanKehadiran::class, 'terlambat'])->name('lapor.terlambat');
-    Route::get('/Admin-LaporanKehadiran-lembur', [AdminLaporanKehadiran::class, 'lembur'])->name('lapor.lembur');
-    Route::get('/Admin-Presensi', [AdminPresensi::class, 'index'])->name('presensi.index');
-    Route::get('/Admin-DataKaryawan', [AdminDataKaryawan::class, 'index'])->name('Data_karyawan.index');
-    Route::get('/Admin-DataKaryawan/{id}/edit', [AdminDataKaryawan::class, 'edit'])->name('Data_karyawan.edit');
-
-    Route::get('/Admin-LaporanKehadiran-dataKehadiran', [AdminLaporanKehadiran::class, 'getDummyKehadiran'])->name('Data_kehadiran.getDummy');
-    Route::get('/Admin-LaporanKehadiran-dataKehadiran-terlambat', [AdminLaporanKehadiran::class, 'getDummyTerlambat'])->name('Data_kehadiran.getTerlambat');
-    Route::get('/Admin-LaporanKehadiran-dataKehadiran-lembur', [AdminLaporanKehadiran::class, 'getDummyLembur'])->name('Data_kehadiran.getLembur');
-    Route::get('/Admin-DataKaryawan-dataKaryawan', [AdminDataKaryawan::class, 'getDummyDataKaryawanJson'])->name('Data_karyawan.getDummy');
+        Route::get('/SuperAdmin-LaporanKehadiran', [superAdminLaporanKehadiran::class, 'index'])->name('SA.lapor.index');
+        Route::get('/SuperAdmin-LaporanKehadiran-terlambat', [superAdminLaporanKehadiran::class, 'terlambat'])->name('lapor.terlambat');
+        Route::get('/SuperAdmin-LaporanKehadiran-lembur', [superAdminLaporanKehadiran::class, 'lembur'])->name('lapor.lembur');
+        Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran', [superAdminLaporanKehadiran::class, 'getData'])->name('Super.Data_kehadiran.getData');
+        Route::post('/SuperAdmin-LaporanKehadiran-dataKehadiran-store', [superAdminLaporanKehadiran::class, 'store'])->name('Super.Data_kehadiran.tambah');
+        Route::get('/SuperAdmin-LaporanKehadiran/{id}/edit', [superAdminLaporanKehadiran::class, 'edit'])->name('Super.Data_kehadiran.edit');
+        Route::put('/SuperAdmin-LaporanKehadiran/{id}/update', [superAdminLaporanKehadiran::class, 'update'])->name('SA.Data_kehadiran.update');
+        Route::delete('/SuperAdmin-LaporanKehadiran-dataKehadiran/{id}/destroy', [superAdminLaporanKehadiran::class, 'destroy'])->name('SA.Data_kehadiran.destroy');
+        Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran-terlambat', [superAdminLaporanKehadiran::class, 'getDummyTerlambat'])->name('Super.Data_kehadiran.getTerlambat');
+        Route::get('/SuperAdmin-LaporanKehadiran-dataKehadiran-lembur', [superAdminLaporanKehadiran::class, 'getDummyLembur'])->name('Super.Data_kehadiran.getLembur');
+    
+        Route::get('/SuperAdmin-Presensi', [superAdminPresensi::class, 'index'])->name('SA.presensi.index');
+        Route::post('/SuperAdmin-Presensi/masuk', [superAdminPresensi::class, 'presensiMasuk'])->name('SA.presensi.masuk');
+        Route::post('/SuperAdmin-Presensi/keluar', [superAdminPresensi::class, 'presensiKeluar'])->name('SA.presensi.keluar');
+        Route::post('/SuperAdmin-Presensi/izin', [superAdminPresensi::class, 'izinAbsen'])->name('SA.presensi.izin');
 
     
-    Route::get('/Karyawan-dashboard', [KaryawanDashboard::class, 'index'])->name('Karyawan-dashboard');
-    Route::get('/Karyawan-LaporanKehadiran', [KaryawanLaporanKehadiran::class, 'index'])->name('lapor.index');
-    Route::get('/Karyawan-LaporanKehadiran-terlambat', [KaryawanLaporanKehadiran::class, 'terlambat'])->name('lapor.terlambat');
-    Route::get('/Karyawan-LaporanKehadiran-lembur', [KaryawanLaporanKehadiran::class, 'lembur'])->name('lapor.lembur');
-    Route::get('/Karyawan-Presensi', [KaryawanPresensi::class, 'index'])->name('presensi.index');
-    Route::get('/Karyawan-DataKaryawan', [KaryawanDataKaryawan::class, 'index'])->name('Data_karyawan.index');
-    Route::get('/Karyawan-DataKaryawan/{id}/edit', [KaryawanDataKaryawan::class, 'edit'])->name('Data_karyawan.edit');
+        Route::get('/SuperAdmin-DataKaryawan', [superAdminDataKaryawan::class, 'index'])->name('SA.Data_karyawan.index');
+        Route::get('/SuperAdmin-DataKaryawan/{id}/edit', [superAdminDataKaryawan::class, 'edit'])->name('SA.Data_karyawan.edit');
+        Route::put('/SuperAdmin-DataKaryawan/{id}/update', [superAdminDataKaryawan::class, 'update'])->name('SA.Data_karyawan.update');
+        Route::delete('/SuperAdmin-DataKaryawan/{id}/destroy', [superAdminDataKaryawan::class, 'destroy'])->name('SA.Data_karyawan.destroy');
+        Route::get('/SuperAdmin-DataKaryawan-dataKaryawan', [superAdminDataKaryawan::class, 'getData'])->name('Super.Data_karyawan.getData');
+        Route::post('/SuperAdmin-DataKaryawan-dataKaryawan-store', [superAdminDataKaryawan::class, 'store'])->name('Super.Data_karyawan.tambah');
+    
+        Route::get('/SuperAdmin-DataUser', [superAdminUserController::class, 'index'])->name('SA.Data_User.index');
+        Route::post('/SuperAdmin-DataUser-store', [superAdminUserController::class, 'store'])->name('SA.Data_User.tambah');
+        Route::get('/SuperAdmin-DataUser-getData', [superAdminUserController::class, 'getData'])->name('SA.Data_User.getData');
+        Route::get('/SuperAdmin-DataUser/{id}/edit', [superAdminUserController::class, 'edit'])->name('SA.Data_User.edit');
+        Route::put('/SuperAdmin-DataUser/{id}/update', [superAdminUserController::class, 'update'])->name('SA.Data_User.update');
+        Route::delete('/SuperAdmin-DataUser/{id}/destroy', [superAdminUserController::class, 'destroy'])->name('SA.Data_User.destroy');
 
-    Route::get('/Karyawan-LaporanKehadiran-dataKehadiran', [KaryawanLaporanKehadiran::class, 'getDummyKehadiran'])->name('Data_kehadiran.getDummy');
-    Route::get('/Karyawan-LaporanKehadiran-dataKehadiran-terlambat', [KaryawanLaporanKehadiran::class, 'getDummyTerlambat'])->name('Data_kehadiran.getTerlambat');
-    Route::get('/Karyawan-LaporanKehadiran-dataKehadiran-lembur', [KaryawanLaporanKehadiran::class, 'getDummyLembur'])->name('Data_kehadiran.getLembur');
-    Route::get('/Karyawan-DataKaryawan-dataKaryawan', [KaryawanDataKaryawan::class, 'getDummyDataKaryawanJson'])->name('Data_karyawan.getDummy');
+        // admin
+        Route::get('/Admin-dashboard', [AdminDashboard::class, 'index'])->name('Admin-dashboard');
+        Route::get('/Admin-LaporanKehadiran', [AdminLaporanKehadiran::class, 'index'])->name('lapor.index');
+        Route::get('/Admin-LaporanKehadiran-terlambat', [AdminLaporanKehadiran::class, 'terlambat'])->name('lapor.terlambat');
+        Route::get('/Admin-LaporanKehadiran-lembur', [AdminLaporanKehadiran::class, 'lembur'])->name('lapor.lembur');
+        Route::get('/Admin-Presensi', [AdminPresensi::class, 'index'])->name('presensi.index');
+
+
+        Route::get('/Admin-DataKaryawan', [AdminDataKaryawan::class, 'index'])->name('A.Data_karyawan.index');
+        Route::get('/Admin-DataKaryawan-getData', [AdminDataKaryawan::class, 'getData'])->name('A.Data_karyawan.getData');
+        Route::get('/Admin-DataKaryawan/{id}/edit', [AdminDataKaryawan::class, 'edit'])->name('Admin.Data_karyawan.edit');
+
+        Route::get('/Admin-LaporanKehadiran-dataKehadiran', [AdminLaporanKehadiran::class, 'getDummyKehadiran'])->name('Data_kehadiran.getDummy');
+        Route::get('/Admin-LaporanKehadiran-dataKehadiran-terlambat', [AdminLaporanKehadiran::class, 'getDummyTerlambat'])->name('Data_kehadiran.getTerlambat');
+        Route::get('/Admin-LaporanKehadiran-dataKehadiran-lembur', [AdminLaporanKehadiran::class, 'getDummyLembur'])->name('Data_kehadiran.getLembur');
+        Route::get('/Admin-DataKaryawan-dataKaryawan', [AdminDataKaryawan::class, 'getDummyDataKaryawanJson'])->name('Data_karyawan.getDummy');
+        
+        Route::get('/Karyawan-dashboard', [KaryawanDashboard::class, 'index'])->name('Karyawan-dashboard');
+        Route::get('/Karyawan-LaporanKehadiran', [KaryawanLaporanKehadiran::class, 'index'])->name('lapor.index');
+        Route::get('/Karyawan-LaporanKehadiran-terlambat', [KaryawanLaporanKehadiran::class, 'terlambat'])->name('lapor.terlambat');
+        Route::get('/Karyawan-LaporanKehadiran-lembur', [KaryawanLaporanKehadiran::class, 'lembur'])->name('lapor.lembur');
+        Route::get('/Karyawan-Presensi', [KaryawanPresensi::class, 'index'])->name('presensi.index');
+        Route::get('/Karyawan-DataKaryawan', [KaryawanDataKaryawan::class, 'index'])->name('Data_karyawan.index');
+        Route::get('/Karyawan-DataKaryawan/{id}/edit', [KaryawanDataKaryawan::class, 'edit'])->name('Data_karyawan.edit');
+    
+        Route::get('/Karyawan-LaporanKehadiran-dataKehadiran', [KaryawanLaporanKehadiran::class, 'getDummyKehadiran'])->name('Data_kehadiran.getDummy');
+        Route::get('/Karyawan-LaporanKehadiran-dataKehadiran-terlambat', [KaryawanLaporanKehadiran::class, 'getDummyTerlambat'])->name('Data_kehadiran.getTerlambat');
+        Route::get('/Karyawan-LaporanKehadiran-dataKehadiran-lembur', [KaryawanLaporanKehadiran::class, 'getDummyLembur'])->name('Data_kehadiran.getLembur');
+        Route::get('/Karyawan-DataKaryawan-dataKaryawan', [KaryawanDataKaryawan::class, 'getDummyDataKaryawanJson'])->name('Data_karyawan.getDummy');
+    
+
+
+});
+
+// Route::group(['middleware' => ['auth', 'role:super_admin']], function () {
+//     // dd('sampau');
+//     
 
 // });
-Route::get('/login', [loginController::class, 'form'])->name('login.form');
+    
+// admin
+// Route::group(['middleware' => ['auth', 'role:admin']], function () {
+//     
+
+// });
+
+
+// / Rute untuk Karyawan
+// Route::group(['middleware' => ['auth', 'role:karyawan']], function () {
+   
+// }); 
+  
+// });
+Route::get('/login', [loginController::class, 'form'])->name('login');
 Route::post('/login', [loginController::class, 'login'])->name('login');
+Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 
 
-Route::get('/template_karyawan', function () {
-    return view('template_karyawan');
-});
+// Route::get('/template_karyawan', function () {
+//     return view('template_karyawan');
+// });
 // Route::get('/login', function () {
 //     return view('auth/login');
+// // });
+// Route::get('/template_admin', function () {
+//     return view('template_admin');
 // });
-Route::get('/template_admin', function () {
-    return view('template_admin');
-});
 // Route::get('/hrd', function () {
 //     return view('super_admin.dashboard.index');
 // });

@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
                  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+{{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script> --}}
 
 <script>
 function editData(id, NIK,no_kk, nama, no_rt, no_rw, gender,SHDK, tempat_lahir, tanggal_lahir, alamat, nama_kepala_keluarga, jumlah_anggota_keluarga, jenis_pekerjaan, pendapatan_bulanan, golongan_bantuan) {

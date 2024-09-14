@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dataKaryawan;
+use App\Models\User;
 
 class AdminDataKaryawan extends Controller
 {
@@ -11,40 +14,23 @@ class AdminDataKaryawan extends Controller
      */
     public function index()
     {
-        return view('admin.data_karyawan.index', );
+        $dataUser = User::all();
+        $data = dataKaryawan::all();
+        $user = Auth::user(); // Ambil pengguna yang sedang login
+        $dataKaryawan = dataKaryawan::where('id_user', $user->id_user)->first(); 
+        // // return response()->json(['data' => $dummyData]);
+        // dd($data->toArray());
+        return view('admin.data_karyawan.index',  compact('data', 'dataUser','dataKaryawan'));
     }
-    public function getDummyDataKaryawan()
-    {
-        return [
-            [
-                'id' => 1,
-                'nama' => 'toto',
-                'nik' => '111',
-                'jenis_kelamin' => 'laki laki',
-                'tempat_lahir' => 'inggris',
-                'tanggal_lahir' => '2024-08-01',
-                'alamat' => 'inggris',
-                'perusahaan' => 'perusahaan 3',
-                'posisi' => 'team principal',
-            ],
-            [
-                'id' => 2,
-                'nama' => 'titi',
-                'nik' => '111',
-                'jenis_kelamin' => 'laki laki',
-                'tempat_lahir' => 'inggris',
-                'tanggal_lahir' => '2024-08-01',
-                'alamat' => 'inggris',
-                'perusahaan' => 'mercedez',
-                'posisi' => 'team principal',
-            ],
-        ];
-    }
+ 
 
-    public function getDummyDataKaryawanJson()
+    public function getData()
     {
-        $dummyData = $this->getDummyDataKaryawan();
-        return response()->json(['data' => $dummyData]);
+        $data = dataKaryawan::all();
+        // return response()->json(['data' => $dummyData]);
+    //     dd($data);
+            // return $data;
+         return response()->json(['data' => $data]);
     }
     /**
      * Show the form for creating a new resource.

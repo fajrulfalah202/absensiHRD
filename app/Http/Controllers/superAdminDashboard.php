@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+// use App\Models\User;
+use App\Models\dataKaryawan;
 use Illuminate\Http\Request;
 
 class superAdminDashboard extends Controller
@@ -11,7 +13,10 @@ class superAdminDashboard extends Controller
      */
     public function index()
     {
-        return view('super_admin.dashboard.index', );
+        $user = Auth::user(); // Ambil pengguna yang sedang login
+        $dataKaryawan = dataKaryawan::where('id_user', $user->id_user)->first(); // Ambil data karyawan terkait
+        // dd($dataKaryawan->toArray());
+        return view('super_admin.dashboard.index',compact('dataKaryawan') );
     }
 
     /**

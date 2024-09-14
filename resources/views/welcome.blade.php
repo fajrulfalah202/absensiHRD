@@ -106,12 +106,17 @@
                 @if (Route::has('login'))
                 <div>
                     @auth
-                    <a href="{{ url('/dashboard') }}" class="btn btn-light">Dashboard</a>
+                    <!-- Check the user role and provide the appropriate dashboard link -->
+                    @if (Auth::user()->hasRole('super_admin'))
+                        <a href="{{ url('/SuperAdmin-dashboard') }}" class="btn btn-light">Dashboard</a>
+                    @elseif (Auth::user()->hasRole('admin'))
+                        <a href="{{ url('/Admin-dashboard') }}" class="btn btn-light">Dashboard</a>
+                    @elseif (Auth::user()->hasRole('karyawan'))
+                        <a href="{{ url('/Karyawan-dashboard') }}" class="btn btn-light">Dashboard</a>
+                    @endif
                     @else
                     <a href="{{ route('login') }}" class="btn btn-light">Log in</a>
-                    @if (Route::has('register'))
                     @endif
-                    @endauth
                 </div>
                 @endif
             </div>

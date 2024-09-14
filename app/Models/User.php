@@ -16,12 +16,19 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public $timestamps = false;
+    protected $table= 'user';
     protected $fillable = [
-        'name',
-        'email',
+        'id',
+        'id_user',
+        'username',
         'password',
+        'role',
     ];
-
+    public function dataKaryawan()
+    {
+        return $this->hasOne(DataKaryawan::class, 'user_id'); // 'user_id' sesuai dengan nama kolom foreign key
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -44,4 +51,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function hasRole($role)
+{
+    return $this->role === $role;
+}
 }

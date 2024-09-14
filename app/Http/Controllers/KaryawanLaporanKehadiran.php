@@ -12,27 +12,27 @@ class KaryawanLaporanKehadiran extends Controller
      */
         protected $dummyData;
 
-     public function __construct()
-    {
-        $this->dummyData = [
-            [
-                'nama' => 'toto',
-                'tanggal' => '2024-08-01',
-                'check_in' => '08:00:00',
-                'check_out' => '17:00:00',
-                'lokasi' => 'kantor',
-                'keterangan' => 'hadir',
-            ],
-            [
-                'nama' => '-02',
-                'tanggal' => '2024-08-02',
-                'check_in' => '08:15:00',
-                'check_out' => '16:00:00',
-                'lokasi' => 'kantor',
-                'keterangan' => 'hadir',
-            ],
-        ];
-    }
+    //  public function __construct()
+    // {
+    //     $this->dummyData = [
+    //         [
+    //             'nama' => 'toto',
+    //             'tanggal' => '2024-08-01',
+    //             'check_in' => '08:00:00',
+    //             'check_out' => '17:00:00',
+    //             'lokasi' => 'kantor',
+    //             'keterangan' => 'hadir',
+    //         ],
+    //         [
+    //             'nama' => '-02',
+    //             'tanggal' => '2024-08-02',
+    //             'check_in' => '08:15:00',
+    //             'check_out' => '16:00:00',
+    //             'lokasi' => 'kantor',
+    //             'keterangan' => 'hadir',
+    //         ],
+    //     ];
+    // }
 
     public function index()
     {

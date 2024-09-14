@@ -18,7 +18,7 @@ class KaryawanDataKaryawan extends Controller
         return [
             [
                 'id' => 1,
-                'nama' => 'toto',
+                'nama' => 'totol',
                 'nik' => '111',
                 'jenis_kelamin' => 'laki laki',
                 'tempat_lahir' => 'inggris',

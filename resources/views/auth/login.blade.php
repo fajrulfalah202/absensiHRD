@@ -171,19 +171,28 @@
                 {{-- <img src="{{ asset('img/Lambang_Kabupaten_Gresik.png') }}" alt="Logo" width="30" height="30" class="d-inline-block align-top"> --}}
                 human resource
             </a>
-            <div class="d-flex">
+            {{-- <div class="d-flex">
                 @if (Route::has('login'))
                 <div>
                     @auth
-                    <a href="{{ url('/dashboard') }}" class="btn btn-light">Dashboard</a>
+                    @role('super_admin')
+                            <a href="{{ route('SA-dashboard') }}" class="btn btn-light">Super Admin Dashboard</a>
+                    @endrole
+                    @role('admin')
+                            <a href="{{ route('Admin-dashboard') }}" class="btn btn-light">Admin Dashboard</a>
+                    @endrole
+                    @role('karyawan')
+                            <a href="{{ route('Karyawan-dashboard') }}" class="btn btn-light">Karyawan Dashboard</a>
+                        @endrole
                     @else
-                    <a href="{{ route('login') }}" class="btn btn-light">Log in</a>
-                    @if (Route::has('register'))
-                    @endif
+                        <a href="{{ route('login') }}" class="btn btn-light">Log in</a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="btn btn-light">Register</a>
+                        @endif
                     @endauth
                 </div>
                 @endif
-            </div>
+            </div> --}}
         </div>
     </nav>
 

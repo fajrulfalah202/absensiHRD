@@ -118,6 +118,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
+                                            <th>id user</th>
                                             <th>NIK</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Tempat Lahir</th>
@@ -130,6 +131,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>Nama</th>
+                                            <th>id user</th>
                                             <th>NIK</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Tempat Lahir</th>
@@ -177,7 +179,7 @@
                                 processing: true,
                                 serverSide: true,
                                 ajax: {
-                                    url: "{{ route('Data_karyawan.getDummy') }}",
+                                    url: "{{ route('A.Data_karyawan.getData') }}",
                                     error: function(xhr, error, thrown) {
                                         alert('Something went wrong. Please try again.');
                                     }
@@ -186,6 +188,13 @@
                                     {
                                         data: 'nama',
                                         name: 'nama',
+                                        orderable: true,
+                                        searchable: true,
+                                    },
+                                   
+                                    {
+                                        data: 'id_user',
+                                        name: 'id_user',
                                         orderable: true,
                                         searchable: true,
                                     },
