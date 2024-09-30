@@ -1,5 +1,5 @@
 @extends('template_admin')
-@section('konten2')
+@section('konten')
 <div class="card">
     <div class="card-header  bg-secondary text-light">
      <h1>Laporan</h1> 
@@ -46,7 +46,7 @@
 
       @endif
     </div>
-</div>
+  </div>
   </div>
   <script>
     function updateClock() {

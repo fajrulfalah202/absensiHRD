@@ -1,5 +1,5 @@
 @extends('template_admin')
-@section('konten2')
+@section('konten')
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Tabel Karyawan</h1>
                     <p class="mb-4">Berikut berupa data karyawan .</p>

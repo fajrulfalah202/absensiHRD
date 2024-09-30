@@ -1,5 +1,5 @@
 @extends('template_admin2')
-@section('konten2')
+@section('kontenAdmin')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h5 class="m-0 font-weight-bold text-primary">Data Laporan lembur Bulan Ini </h5>
@@ -42,15 +42,15 @@
             serverSide: false,
             ajax: {
 
-                url: "{{ route('Data_kehadiran.getLembur') }}",
+                url: "{{ route('A.Data_kehadiran.getLembur') }}",
                 error: function(xhr, error, thrown) {
                     alert('Something went wrong. Please try again.');
                 }
             },
             columns: [
                 {
-                    data: 'nama',
-                    name: 'nama',
+                    data: 'id_user',
+                    name: 'id_user',
                     orderable: true,
                     searchable: true,
                 },

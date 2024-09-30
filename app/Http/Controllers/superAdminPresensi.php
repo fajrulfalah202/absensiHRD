@@ -89,7 +89,7 @@ class superAdminPresensi extends Controller
                 'status' => "hadir",
             ]);
 
-            return redirect()->back()->with('success', 'Presensi keluar berhasil!');
+            return redirect()->back()->with('success', 'Presensi keluar berhasil masuk!');
         } else {
             // Jika tidak ada record presensi masuk untuk hari ini
             return redirect()->back()->with('error', 'Tidak ada presensi masuk untuk hari ini.');

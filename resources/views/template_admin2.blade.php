@@ -149,7 +149,7 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    @yield('konten2')
+                    @yield('kontenAdmin')
 
                     {{-- Data validation --}}
                     @if ($errors->any())

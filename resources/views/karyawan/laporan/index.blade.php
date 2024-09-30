@@ -41,15 +41,15 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('Data_kehadiran.getDummy') }}",
+                url: "{{ route('Data_kehadiran.getKehadiran') }}",
                 error: function(xhr, error, thrown) {
                     alert('Something went wrong. Please try again.');
                 }
             },
             columns: [
                 {
-                    data: 'nama',
-                    name: 'nama',
+                    data: 'id_user',
+                    name: 'id_user',
                     orderable: true,
                     searchable: true,
                 },

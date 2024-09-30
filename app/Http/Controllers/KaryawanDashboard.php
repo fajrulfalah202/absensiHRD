@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dataKaryawan;
+use App\Models\User;
 
 class KaryawanDashboard extends Controller
 {
@@ -11,7 +14,10 @@ class KaryawanDashboard extends Controller
      */
     public function index()
     {
-        return view('karyawan.dashboard.index', );
+        $user = Auth::user(); // Ambil pengguna yang sedang login
+        $dataKaryawan = dataKaryawan::where('id_user', $user->id_user)->first(); 
+        return view('karyawan.dashboard.index',compact('dataKaryawan') );
+        // return view('karyawan.dashboard.index', );
     }
 
     /**

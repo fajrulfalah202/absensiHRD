@@ -38,14 +38,20 @@ class superAdminLaporanKehadiran extends Controller
             // Mengambil semua data kehadiran
         $data = laporanKehadiran::all();
         
-        // Menggunakan Collection untuk memfilter data
         $filteredData = $data->filter(function($item) {
+            // Cek apakah check_in atau check_out tidak valid (misalnya tanda "-")
+            if ($item->check_in == '-' || $item->check_out == '-' || $item->check_in == null || $item->check_out == null) {
+                return false; // Abaikan data jika check_in atau check_out tidak valid
+            }
+    
+            // Jika valid, parse menggunakan Carbon
             $checkIn = Carbon::parse($item->check_in);
             $checkOut = Carbon::parse($item->check_out);
             $difference = $checkIn->diffInHours($checkOut);
-
-            return $difference < 8;
+    
+            return $difference < 8; // Kembalikan true jika selisih kurang dari 8 jam
         });
+    
 
         // Mengembalikan data yang sudah difilter dalam format JSON
         return response()->json(['data' => $filteredData->values()->all()]);
@@ -55,14 +61,20 @@ class superAdminLaporanKehadiran extends Controller
        // Mengambil semua data kehadiran
     $data = laporanKehadiran::all();
 
-    // Menggunakan Collection untuk memfilter data
     $filteredData = $data->filter(function($item) {
+        // Cek apakah check_in atau check_out tidak valid (misalnya tanda "-")
+        if ($item->check_in == '-' || $item->check_out == '-' || $item->check_in == null || $item->check_out == null) {
+            return false; // Abaikan data jika check_in atau check_out tidak valid
+        }
+
+        // Jika valid, parse menggunakan Carbon
         $checkIn = Carbon::parse($item->check_in);
         $checkOut = Carbon::parse($item->check_out);
         $difference = $checkIn->diffInHours($checkOut);
 
-        return $difference > 8;
+        return $difference > 8; // Kembalikan true jika selisih kurang dari 8 jam
     });
+
 
     // Mengembalikan data yang sudah difilter dalam format JSON
     return response()->json(['data' => $filteredData->values()->all()]);

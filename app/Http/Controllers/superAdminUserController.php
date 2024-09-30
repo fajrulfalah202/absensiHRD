@@ -82,14 +82,15 @@ class superAdminUserController extends Controller
     public function edit(string $id)
     {
         $data = User::find($id);
-
+        $user = Auth::user();
+        $dataKaryawan = dataKaryawan::where('id_user', $user->id_user)->first();  
         
       
         // dd($data);
 
         if ($data) {
             //  dd($data);
-            return view('super_admin.data_user.edit', compact('data'));
+            return view('super_admin.data_user.edit', compact('data','dataKaryawan'));
         } else {
             return redirect()->back()->with('error', 'Data not found');
         }

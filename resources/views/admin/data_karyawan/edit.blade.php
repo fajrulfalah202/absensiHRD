@@ -1,5 +1,5 @@
 @extends('template_admin2')
-@section('konten2')
+@section('kontenAdmin')
     <div class="card-body">
 
         <form   method="POST">

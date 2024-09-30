@@ -1,6 +1,6 @@
 @extends('template_admin')
 
-@section('konten2')
+@section('konten')
     <div class="card-body">
         <form action="{{ route('SA.Data_karyawan.update', $data->id) }}" method="POST">
             @csrf
@@ -74,6 +74,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
+            <a  href="{{route('SA.Data_User.index')}}" class="btn btn-warning">cancel</a>
         </form>
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

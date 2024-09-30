@@ -4,79 +4,86 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\dataKaryawan;
+use App\Models\User;
+use App\Models\laporanKehadiran;
 
 class AdminLaporanKehadiran extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-        protected $dummyData;
-
-     public function __construct()
-    {
-        $this->dummyData = [
-            [
-                'nama' => 'toto',
-                'tanggal' => '2024-08-01',
-                'check_in' => '08:00:00',
-                'check_out' => '17:00:00',
-                'lokasi' => 'kantor',
-                'keterangan' => 'hadir',
-            ],
-            [
-                'nama' => '-02',
-                'tanggal' => '2024-08-02',
-                'check_in' => '08:15:00',
-                'check_out' => '16:00:00',
-                'lokasi' => 'kantor',
-                'keterangan' => 'hadir',
-            ],
-        ];
-    }
-
+      
     public function index()
     {
-        return view('admin.laporan_kehadiran.index', );
+        $user = Auth::user(); // Ambil pengguna yang sedang login
+        $dataKaryawan = dataKaryawan::where('id_user', $user->id_user)->first(); 
+        return view('admin.laporan_kehadiran.index',compact('dataKaryawan') );
     }
     public function terlambat()
     {
-        return view('admin.laporan_kehadiran.terlambat', );
+        $user = Auth::user(); // Ambil pengguna yang sedang login
+        $dataKaryawan = dataKaryawan::where('id_user', $user->id_user)->first();
+        return view('admin.laporan_kehadiran.terlambat',compact('dataKaryawan'));
     }
     public function lembur()
     {
-        return view('admin.laporan_kehadiran.lembur', );
+        $user = Auth::user(); // Ambil pengguna yang sedang login
+        $dataKaryawan = dataKaryawan::where('id_user', $user->id_user)->first();    
+        return view('admin.laporan_kehadiran.lembur', compact('dataKaryawan'));
     }
 
-    public function getDummyTerlambat()
+    public function getTerlambat()
     {
-        // Filter data yang memiliki selisih waktu kurang dari 8 jam
-        $filteredData = array_filter($this->dummyData, function($data) {
-            $checkIn = Carbon::createFromTimeString($data['check_in']);
-            $checkOut = Carbon::createFromTimeString($data['check_out']);
+        $data = laporanKehadiran::all();
+        $filteredData = $data->filter(function($item) {
+            // Cek apakah check_in atau check_out tidak valid (misalnya tanda "-")
+            if ($item->check_in == '-' || $item->check_out == '-' || $item->check_in == null || $item->check_out == null) {
+                return false; // Abaikan data jika check_in atau check_out tidak valid
+            }
+    
+            // Jika valid, parse menggunakan Carbon
+            $checkIn = Carbon::parse($item->check_in);
+            $checkOut = Carbon::parse($item->check_out);
             $difference = $checkIn->diffInHours($checkOut);
-
-            return $difference < 8;
+    
+            return $difference < 8; // Kembalikan true jika selisih kurang dari 8 jam
         });
-        
-        return response()->json(['data' => array_values($filteredData)]);
+    
+        // dd($filteredData->toArray());
+        // Mengembalikan data yang sudah difilter dalam format JSON
+        return response()->json(['data' => $filteredData->values()->all()]);
     }
-    public function getDummyLembur()
+    public function getLembur()
     {
+        $data = laporanKehadiran::all();
         // Filter data yang memiliki selisih waktu kurang dari 8 jam
-        $filteredData = array_filter($this->dummyData, function($data) {
-            $checkIn = Carbon::createFromTimeString($data['check_in']);
-            $checkOut = Carbon::createFromTimeString($data['check_out']);
+        $filteredData = $data->filter(function($item) {
+            // Cek apakah check_in atau check_out tidak valid (misalnya tanda "-")
+            if ($item->check_in == '-' || $item->check_out == '-' || $item->check_in == null || $item->check_out == null) {
+                return false; // Abaikan data jika check_in atau check_out tidak valid
+            }
+    
+            // Jika valid, parse menggunakan Carbon
+            $checkIn = Carbon::parse($item->check_in);
+            $checkOut = Carbon::parse($item->check_out);
             $difference = $checkIn->diffInHours($checkOut);
-
-            return $difference > 8;
+    
+            return $difference > 8; // Kembalikan true jika selisih kurang dari 8 jam
         });
-        
-        return response()->json(['data' => array_values($filteredData)]);
+    
+    
+        // Mengembalikan data yang sudah difilter dalam format JSON
+        return response()->json(['data' => $filteredData->values()->all()]);
     }
-    public function getDummyKehadiran()
+    public function getKehadiran()
     { 
 
-        return response()->json(['data' => $this->dummyData]);
+        $data = laporanKehadiran::all();
+        // return response()->json(['data' => $dummyData]);
+        // dd($data);
+        return response()->json(['data' => $data]);
     }
         
     /**

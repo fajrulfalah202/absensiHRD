@@ -1,5 +1,5 @@
 @extends('template_admin')
-@section('konten2')
+@section('konten')
 <h1>Laporan Kehadiran</h1>
 
 <div class="row">

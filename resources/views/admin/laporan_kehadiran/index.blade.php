@@ -1,5 +1,5 @@
 @extends('template_admin2')
-@section('konten2')
+@section('kontenAdmin')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h5 class="m-0 font-weight-bold text-primary">Data Laporan Kehadiran Bulan Ini </h5>
@@ -9,20 +9,22 @@
             <table class="table table-bordered display" id="dataKehadiran" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Nama</th>
+                        <th>id user</th>
                         <th>Tanggal</th>
                         <th>Check In</th>
                         <th>Check Out</th>
+                        <th>status</th>
                         <th>Lokasi</th>
                         <th>Keterangan</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>Nama</th>
+                        <th>id user</th>
                         <th>Tanggal</th>
                         <th>Check In</th>
                         <th>Check Out</th>
+                        <th>status</th>
                         <th>Lokasi</th>
                         <th>Keterangan</th>
                     </tr>
@@ -41,15 +43,15 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('Data_kehadiran.getDummy') }}",
+                url: "{{ route('A.Data_kehadiran.getData') }}",
                 error: function(xhr, error, thrown) {
                     alert('Something went wrong. Please try again.');
                 }
             },
             columns: [
                 {
-                    data: 'nama',
-                    name: 'nama',
+                    data: 'id_user',
+                    name: 'id_user',
                     orderable: true,
                     searchable: true,
                 },
@@ -68,6 +70,12 @@
                 {
                     data: 'check_out',
                     name: 'check_out',
+                    orderable: true,
+                    searchable: true,
+                },
+                {
+                    data: 'status',
+                    name: 'status',
                     orderable: true,
                     searchable: true,
                 },
@@ -93,9 +101,7 @@
             pageLength: 10,
             responsive: true,
             autoWidth: true,
-            initComplete: function(settings, json) {
-                // Fungsi ini bisa disesuaikan atau dihapus jika tidak digunakan
-            }
+           
         });
     });
 </script>
